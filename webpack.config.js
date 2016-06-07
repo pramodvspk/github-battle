@@ -18,6 +18,7 @@ module.exports = {
       UserDetailsWrapper: 'app/components/UserDetailsWrapper.jsx',
       Results: 'app/components/Results.jsx',
       ResultsContainer: 'app/containers/ResultsContainer.jsx',
+      MainContainer: 'app/components/MainContainer.jsx',
       styles: 'app/styles/index.js'
     },
     extensions: ['', '.js', '.jsx']

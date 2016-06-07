@@ -58,9 +58,9 @@
 
 	var Main = __webpack_require__(216);
 	var Home = __webpack_require__(217);
-	var ConfirmBattleContainer = __webpack_require__(219);
-	var PromptContainer = __webpack_require__(243);
-	var ResultsContainer = __webpack_require__(245);
+	var ConfirmBattleContainer = __webpack_require__(220);
+	var PromptContainer = __webpack_require__(244);
+	var ResultsContainer = __webpack_require__(246);
 
 	ReactDOM.render(React.createElement(
 	  Router,
@@ -24793,17 +24793,17 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var transparentBg = __webpack_require__(218).transparentBg;
 	var Router = __webpack_require__(159);
 	var Link = Router.Link;
+	var MainContainer = __webpack_require__(218);
 
 	var Home = React.createClass({
 	  displayName: 'Home',
 
 	  render: function render() {
 	    return React.createElement(
-	      'div',
-	      { className: 'jumbotron col-sm-12 text-center', style: transparentBg },
+	      MainContainer,
+	      null,
 	      React.createElement(
 	        'h1',
 	        null,
@@ -24831,6 +24831,25 @@
 
 /***/ },
 /* 218 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var styles = __webpack_require__(219);
+
+	function MainContainer(props) {
+	  return React.createElement(
+	    'div',
+	    { className: 'col-sm-8 col-sm-offset-2 jumbotron text-center', style: styles.transparentBg },
+	    props.children
+	  );
+	}
+
+	module.exports = MainContainer;
+
+/***/ },
+/* 219 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -24847,14 +24866,14 @@
 	module.exports = styles;
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var ConfirmBattle = __webpack_require__(220);
-	var githubHelpers = __webpack_require__(223);
+	var ConfirmBattle = __webpack_require__(221);
+	var githubHelpers = __webpack_require__(224);
 
 	var ConfirmBattleContainer = React.createClass({
 	  displayName: 'ConfirmBattleContainer',
@@ -24899,7 +24918,7 @@
 	module.exports = ConfirmBattleContainer;
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24908,17 +24927,10 @@
 	var PropTypes = React.PropTypes;
 	var Router = __webpack_require__(159);
 	var Link = Router.Link;
-	var styles = __webpack_require__(218);
-	var UserDetails = __webpack_require__(221);
-	var UserDetailsWrapper = __webpack_require__(222);
-
-	function puke(object) {
-	  return React.createElement(
-	    'pre',
-	    null,
-	    JSON.stringify(object, null, ' ')
-	  );
-	};
+	var styles = __webpack_require__(219);
+	var UserDetails = __webpack_require__(222);
+	var UserDetailsWrapper = __webpack_require__(223);
+	var MainContainer = __webpack_require__(218);
 
 	function ConfirmBattle(props) {
 	  return props.isLoading ? React.createElement(
@@ -24926,8 +24938,8 @@
 	    null,
 	    'Loading'
 	  ) : React.createElement(
-	    'div',
-	    { className: 'jumbotron col-sm-12 text-center', style: styles.transparentBg },
+	    MainContainer,
+	    null,
 	    React.createElement(
 	      'h1',
 	      null,
@@ -24985,7 +24997,7 @@
 	module.exports = ConfirmBattle;
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25081,7 +25093,7 @@
 	module.exports = UserDetails;
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25105,12 +25117,12 @@
 	module.exports = UserDetailsWrapper;
 
 /***/ },
-/* 223 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var axios = __webpack_require__(224);
+	var axios = __webpack_require__(225);
 
 	var id = "API_KEY";
 	var sec = "SECRET_ID";
@@ -25168,25 +25180,25 @@
 	module.exports = helpers;
 
 /***/ },
-/* 224 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(225);
+	module.exports = __webpack_require__(226);
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(226);
-	var utils = __webpack_require__(227);
-	var dispatchRequest = __webpack_require__(229);
-	var InterceptorManager = __webpack_require__(238);
-	var isAbsoluteURL = __webpack_require__(239);
-	var combineURLs = __webpack_require__(240);
-	var bind = __webpack_require__(241);
-	var transformData = __webpack_require__(233);
+	var defaults = __webpack_require__(227);
+	var utils = __webpack_require__(228);
+	var dispatchRequest = __webpack_require__(230);
+	var InterceptorManager = __webpack_require__(239);
+	var isAbsoluteURL = __webpack_require__(240);
+	var combineURLs = __webpack_require__(241);
+	var bind = __webpack_require__(242);
+	var transformData = __webpack_require__(234);
 
 	function Axios(defaultConfig) {
 	  this.defaults = utils.merge({}, defaultConfig);
@@ -25275,7 +25287,7 @@
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(242);
+	axios.spread = __webpack_require__(243);
 
 	// Provide aliases for supported request methods
 	utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
@@ -25303,13 +25315,13 @@
 
 
 /***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(227);
-	var normalizeHeaderName = __webpack_require__(228);
+	var utils = __webpack_require__(228);
+	var normalizeHeaderName = __webpack_require__(229);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -25381,7 +25393,7 @@
 
 
 /***/ },
-/* 227 */
+/* 228 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25664,12 +25676,12 @@
 
 
 /***/ },
-/* 228 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(227);
+	var utils = __webpack_require__(228);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -25682,7 +25694,7 @@
 
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -25704,10 +25716,10 @@
 	        adapter = config.adapter;
 	      } else if (typeof XMLHttpRequest !== 'undefined') {
 	        // For browsers use XHR adapter
-	        adapter = __webpack_require__(230);
+	        adapter = __webpack_require__(231);
 	      } else if (typeof process !== 'undefined') {
 	        // For node use HTTP adapter
-	        adapter = __webpack_require__(230);
+	        adapter = __webpack_require__(231);
 	      }
 
 	      if (typeof adapter === 'function') {
@@ -25723,18 +25735,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(227);
-	var buildURL = __webpack_require__(231);
-	var parseHeaders = __webpack_require__(232);
-	var transformData = __webpack_require__(233);
-	var isURLSameOrigin = __webpack_require__(234);
-	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(235);
-	var settle = __webpack_require__(236);
+	var utils = __webpack_require__(228);
+	var buildURL = __webpack_require__(232);
+	var parseHeaders = __webpack_require__(233);
+	var transformData = __webpack_require__(234);
+	var isURLSameOrigin = __webpack_require__(235);
+	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(236);
+	var settle = __webpack_require__(237);
 
 	module.exports = function xhrAdapter(resolve, reject, config) {
 	  var requestData = config.data;
@@ -25831,7 +25843,7 @@
 	  // This is only done if running in a standard browser environment.
 	  // Specifically not if we're in a web worker, or react-native.
 	  if (utils.isStandardBrowserEnv()) {
-	    var cookies = __webpack_require__(237);
+	    var cookies = __webpack_require__(238);
 
 	    // Add xsrf header
 	    var xsrfValue = config.withCredentials || isURLSameOrigin(config.url) ?
@@ -25892,12 +25904,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(227);
+	var utils = __webpack_require__(228);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -25966,12 +25978,12 @@
 
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(227);
+	var utils = __webpack_require__(228);
 
 	/**
 	 * Parse headers into an object
@@ -26009,12 +26021,12 @@
 
 
 /***/ },
-/* 233 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(227);
+	var utils = __webpack_require__(228);
 
 	/**
 	 * Transform the data for a request or a response
@@ -26035,12 +26047,12 @@
 
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(227);
+	var utils = __webpack_require__(228);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -26109,7 +26121,7 @@
 
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26151,7 +26163,7 @@
 
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26175,12 +26187,12 @@
 
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(227);
+	var utils = __webpack_require__(228);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -26234,12 +26246,12 @@
 
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(227);
+	var utils = __webpack_require__(228);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -26292,7 +26304,7 @@
 
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26312,7 +26324,7 @@
 
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26330,7 +26342,7 @@
 
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26347,7 +26359,7 @@
 
 
 /***/ },
-/* 242 */
+/* 243 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26380,13 +26392,13 @@
 
 
 /***/ },
-/* 243 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var Prompt = __webpack_require__(244);
+	var Prompt = __webpack_require__(245);
 
 	var PromptContainer = React.createClass({
 	  displayName: 'PromptContainer',
@@ -26438,14 +26450,14 @@
 	module.exports = PromptContainer;
 
 /***/ },
-/* 244 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
 	var PropTypes = React.PropTypes;
-	var transparentBg = __webpack_require__(218).transparentBg;
+	var transparentBg = __webpack_require__(219).transparentBg;
 
 	function Prompt(props) {
 	  return React.createElement(
@@ -26499,14 +26511,14 @@
 	module.exports = Prompt;
 
 /***/ },
-/* 245 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var Results = __webpack_require__(246);
-	var githubHelpers = __webpack_require__(223);
+	var Results = __webpack_require__(247);
+	var githubHelpers = __webpack_require__(224);
 
 	var ResultsContainer = React.createClass({
 	  displayName: 'ResultsContainer',
@@ -26533,17 +26545,95 @@
 	module.exports = ResultsContainer;
 
 /***/ },
-/* 246 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
 	var PropTypes = React.PropTypes;
-	var styles = __webpack_require__(218);
+	var styles = __webpack_require__(219);
+	var UserDetails = __webpack_require__(222);
+	var UserDetailsWrapper = __webpack_require__(223);
+	var Link = __webpack_require__(159).Link;
+	var MainContainer = __webpack_require__(218);
+
+	function StartOver() {
+	  return React.createElement(
+	    'div',
+	    { className: 'col-sm-12' },
+	    React.createElement(
+	      Link,
+	      { to: '/playerOne' },
+	      React.createElement(
+	        'button',
+	        { type: 'button', className: 'btn btn-danger btn-lg', style: styles.space },
+	        'Start Over'
+	      )
+	    )
+	  );
+	}
 
 	var Results = function Results(props) {
-	  return React.createElement('div', { className: 'jumbotron col-sm-12 text-center' });
+	  if (props.isLoading === true) {
+	    return React.createElement(
+	      'p',
+	      null,
+	      'LOADING'
+	    );
+	  }
+
+	  var winningIndex = props.scores[0] > props.scores[1] ? 0 : 1;
+	  var losingIndex = winningIndex === 0 ? 1 : 0;
+	  if (props.scores[0] === 0) {
+	    props.scores[0] = "0";
+	  }
+	  if (props.scores[1] === 0) {
+	    props.scores[1] = "0";
+	  }
+
+	  // Handling a tie
+	  if (props.scores[0] === props.scores[1]) {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        MainContainer,
+	        null,
+	        React.createElement(
+	          'h1',
+	          null,
+	          'Its a Tie !!'
+	        )
+	      ),
+	      React.createElement(StartOver, null)
+	    );
+	  }
+
+	  return React.createElement(
+	    MainContainer,
+	    null,
+	    React.createElement(
+	      'h1',
+	      null,
+	      'Results'
+	    ),
+	    React.createElement(
+	      'div',
+	      { className: 'col-sm-8 col-sm-offset-2' },
+	      React.createElement(
+	        UserDetailsWrapper,
+	        { header: 'Winner' },
+	        React.createElement(UserDetails, { score: props.scores[winningIndex], info: props.playersInfo[winningIndex] })
+	      ),
+	      React.createElement(
+	        UserDetailsWrapper,
+	        { header: 'Loser' },
+	        React.createElement(UserDetails, { score: props.scores[losingIndex], info: props.playersInfo[losingIndex] })
+	      )
+	    ),
+	    React.createElement(StartOver, null)
+	  );
 	};
 
 	Results.PropTypes = {
