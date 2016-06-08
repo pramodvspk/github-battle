@@ -5,6 +5,7 @@ var UserDetails = require('UserDetails');
 var UserDetailsWrapper = require('UserDetailsWrapper');
 var Link = require('react-router').Link;
 var MainContainer = require('MainContainer');
+var Loading = require('Loading');
 
 function StartOver () {
   return (
@@ -19,7 +20,7 @@ function StartOver () {
 var Results = function (props) {
   if(props.isLoading === true) {
     return(
-      <p>LOADING</p>
+      <Loading text="One Moment" speed={100}></Loading>
     );
   }
 
@@ -40,7 +41,9 @@ var Results = function (props) {
         <MainContainer>
           <h1>Its a Tie !!</h1>
         </MainContainer>
-        <StartOver></StartOver>
+        <div className="col-sm-6 col-sm-offset-3 text-center">
+          <StartOver></StartOver>
+        </div>
       </div>
     );
   }

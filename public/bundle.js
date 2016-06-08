@@ -59,8 +59,8 @@
 	var Main = __webpack_require__(216);
 	var Home = __webpack_require__(217);
 	var ConfirmBattleContainer = __webpack_require__(220);
-	var PromptContainer = __webpack_require__(244);
-	var ResultsContainer = __webpack_require__(246);
+	var PromptContainer = __webpack_require__(245);
+	var ResultsContainer = __webpack_require__(247);
 
 	ReactDOM.render(React.createElement(
 	  Router,
@@ -24873,7 +24873,7 @@
 
 	var React = __webpack_require__(1);
 	var ConfirmBattle = __webpack_require__(221);
-	var githubHelpers = __webpack_require__(224);
+	var githubHelpers = __webpack_require__(225);
 
 	var ConfirmBattleContainer = React.createClass({
 	  displayName: 'ConfirmBattleContainer',
@@ -24931,13 +24931,10 @@
 	var UserDetails = __webpack_require__(222);
 	var UserDetailsWrapper = __webpack_require__(223);
 	var MainContainer = __webpack_require__(218);
+	var Loading = __webpack_require__(224);
 
 	function ConfirmBattle(props) {
-	  return props.isLoading ? React.createElement(
-	    'p',
-	    null,
-	    'Loading'
-	  ) : React.createElement(
+	  return props.isLoading ? React.createElement(Loading, { speed: 500, text: 'Waiting' }) : React.createElement(
 	    MainContainer,
 	    null,
 	    React.createElement(
@@ -25120,9 +25117,85 @@
 /* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var PropTypes = React.PropTypes;
+	var styles = {
+	  container: {
+	    position: 'fixed',
+	    left: 0,
+	    right: 0,
+	    top: 0,
+	    bottom: 0,
+	    fontSize: '55px'
+	  },
+	  content: {
+	    textAlign: 'center',
+	    position: 'absolute',
+	    width: '100%',
+	    marginTop: '30px'
+	  }
+	};
+
+	var Loading = React.createClass({
+	  displayName: 'Loading',
+
+	  propTypes: {
+	    text: PropTypes.string,
+	    speed: PropTypes.number
+	  },
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      text: "Loading",
+	      speed: 300
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    this.originalText = this.props.text;
+	    return {
+	      text: this.originalText
+	    };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    var stopper = this.originalText + "...";
+	    this.interval = setInterval(function () {
+	      if (this.state.text === stopper) {
+	        this.setState({
+	          text: this.originalText
+	        });
+	      } else {
+	        this.setState({
+	          text: this.state.text + "."
+	        });
+	      }
+	    }.bind(this), this.props.speed);
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    clearInterval(this.interval);
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { style: styles.container },
+	      React.createElement(
+	        'p',
+	        { style: styles.content },
+	        this.state.text
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Loading;
+
+/***/ },
+/* 225 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 
-	var axios = __webpack_require__(225);
+	var axios = __webpack_require__(226);
 
 	var id = "API_KEY";
 	var sec = "SECRET_ID";
@@ -25180,25 +25253,25 @@
 	module.exports = helpers;
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(226);
+	module.exports = __webpack_require__(227);
 
 /***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(227);
-	var utils = __webpack_require__(228);
-	var dispatchRequest = __webpack_require__(230);
-	var InterceptorManager = __webpack_require__(239);
-	var isAbsoluteURL = __webpack_require__(240);
-	var combineURLs = __webpack_require__(241);
-	var bind = __webpack_require__(242);
-	var transformData = __webpack_require__(234);
+	var defaults = __webpack_require__(228);
+	var utils = __webpack_require__(229);
+	var dispatchRequest = __webpack_require__(231);
+	var InterceptorManager = __webpack_require__(240);
+	var isAbsoluteURL = __webpack_require__(241);
+	var combineURLs = __webpack_require__(242);
+	var bind = __webpack_require__(243);
+	var transformData = __webpack_require__(235);
 
 	function Axios(defaultConfig) {
 	  this.defaults = utils.merge({}, defaultConfig);
@@ -25287,7 +25360,7 @@
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(243);
+	axios.spread = __webpack_require__(244);
 
 	// Provide aliases for supported request methods
 	utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
@@ -25315,13 +25388,13 @@
 
 
 /***/ },
-/* 227 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(228);
-	var normalizeHeaderName = __webpack_require__(229);
+	var utils = __webpack_require__(229);
+	var normalizeHeaderName = __webpack_require__(230);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -25393,7 +25466,7 @@
 
 
 /***/ },
-/* 228 */
+/* 229 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25676,12 +25749,12 @@
 
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(228);
+	var utils = __webpack_require__(229);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -25694,7 +25767,7 @@
 
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -25716,10 +25789,10 @@
 	        adapter = config.adapter;
 	      } else if (typeof XMLHttpRequest !== 'undefined') {
 	        // For browsers use XHR adapter
-	        adapter = __webpack_require__(231);
+	        adapter = __webpack_require__(232);
 	      } else if (typeof process !== 'undefined') {
 	        // For node use HTTP adapter
-	        adapter = __webpack_require__(231);
+	        adapter = __webpack_require__(232);
 	      }
 
 	      if (typeof adapter === 'function') {
@@ -25735,18 +25808,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(228);
-	var buildURL = __webpack_require__(232);
-	var parseHeaders = __webpack_require__(233);
-	var transformData = __webpack_require__(234);
-	var isURLSameOrigin = __webpack_require__(235);
-	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(236);
-	var settle = __webpack_require__(237);
+	var utils = __webpack_require__(229);
+	var buildURL = __webpack_require__(233);
+	var parseHeaders = __webpack_require__(234);
+	var transformData = __webpack_require__(235);
+	var isURLSameOrigin = __webpack_require__(236);
+	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(237);
+	var settle = __webpack_require__(238);
 
 	module.exports = function xhrAdapter(resolve, reject, config) {
 	  var requestData = config.data;
@@ -25843,7 +25916,7 @@
 	  // This is only done if running in a standard browser environment.
 	  // Specifically not if we're in a web worker, or react-native.
 	  if (utils.isStandardBrowserEnv()) {
-	    var cookies = __webpack_require__(238);
+	    var cookies = __webpack_require__(239);
 
 	    // Add xsrf header
 	    var xsrfValue = config.withCredentials || isURLSameOrigin(config.url) ?
@@ -25904,12 +25977,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(228);
+	var utils = __webpack_require__(229);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -25978,12 +26051,12 @@
 
 
 /***/ },
-/* 233 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(228);
+	var utils = __webpack_require__(229);
 
 	/**
 	 * Parse headers into an object
@@ -26021,12 +26094,12 @@
 
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(228);
+	var utils = __webpack_require__(229);
 
 	/**
 	 * Transform the data for a request or a response
@@ -26047,12 +26120,12 @@
 
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(228);
+	var utils = __webpack_require__(229);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -26121,7 +26194,7 @@
 
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26163,7 +26236,7 @@
 
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26187,12 +26260,12 @@
 
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(228);
+	var utils = __webpack_require__(229);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -26246,12 +26319,12 @@
 
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(228);
+	var utils = __webpack_require__(229);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -26304,7 +26377,7 @@
 
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26324,7 +26397,7 @@
 
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26342,7 +26415,7 @@
 
 
 /***/ },
-/* 242 */
+/* 243 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26359,7 +26432,7 @@
 
 
 /***/ },
-/* 243 */
+/* 244 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26392,13 +26465,13 @@
 
 
 /***/ },
-/* 244 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var Prompt = __webpack_require__(245);
+	var Prompt = __webpack_require__(246);
 
 	var PromptContainer = React.createClass({
 	  displayName: 'PromptContainer',
@@ -26450,7 +26523,7 @@
 	module.exports = PromptContainer;
 
 /***/ },
-/* 245 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26511,14 +26584,14 @@
 	module.exports = Prompt;
 
 /***/ },
-/* 246 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var Results = __webpack_require__(247);
-	var githubHelpers = __webpack_require__(224);
+	var Results = __webpack_require__(248);
+	var githubHelpers = __webpack_require__(225);
 
 	var ResultsContainer = React.createClass({
 	  displayName: 'ResultsContainer',
@@ -26533,7 +26606,7 @@
 	    githubHelpers.battle(this.props.location.state.playersInfo).then(function (scores) {
 	      this.setState({
 	        scores: scores,
-	        isLoading: false
+	        isLoading: true
 	      });
 	    }.bind(this));
 	  },
@@ -26545,7 +26618,7 @@
 	module.exports = ResultsContainer;
 
 /***/ },
-/* 247 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26557,6 +26630,7 @@
 	var UserDetailsWrapper = __webpack_require__(223);
 	var Link = __webpack_require__(159).Link;
 	var MainContainer = __webpack_require__(218);
+	var Loading = __webpack_require__(224);
 
 	function StartOver() {
 	  return React.createElement(
@@ -26576,11 +26650,7 @@
 
 	var Results = function Results(props) {
 	  if (props.isLoading === true) {
-	    return React.createElement(
-	      'p',
-	      null,
-	      'LOADING'
-	    );
+	    return React.createElement(Loading, { text: 'One Moment', speed: 100 });
 	  }
 
 	  var winningIndex = props.scores[0] > props.scores[1] ? 0 : 1;
@@ -26606,7 +26676,11 @@
 	          'Its a Tie !!'
 	        )
 	      ),
-	      React.createElement(StartOver, null)
+	      React.createElement(
+	        'div',
+	        { className: 'col-sm-6 col-sm-offset-3 text-center' },
+	        React.createElement(StartOver, null)
+	      )
 	    );
 	  }
 

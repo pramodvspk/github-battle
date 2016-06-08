@@ -19,6 +19,7 @@ module.exports = {
       Results: 'app/components/Results.jsx',
       ResultsContainer: 'app/containers/ResultsContainer.jsx',
       MainContainer: 'app/components/MainContainer.jsx',
+      Loading: 'app/components/Loading.jsx',
       styles: 'app/styles/index.js'
     },
     extensions: ['', '.js', '.jsx']
