@@ -34,11 +34,6 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/
       },
-      { test: /\.less/, loader: 'style!css!less' },
-     // Used for Bootstrap Less Source Files
-     { test: /\.css/, loader: 'style!css' },
-     // Used for Bootstrap Glyphicon Fonts
-     { test: /\.(woff2|woff|ttf|svg|eot)$/, loader: 'file' }
     ]
   }
 };

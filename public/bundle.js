@@ -24812,7 +24812,7 @@
 	      React.createElement(
 	        'p',
 	        { className: 'lead' },
-	        'Fancy motto'
+	        'What is React ?'
 	      ),
 	      React.createElement(
 	        Link,
@@ -26606,7 +26606,7 @@
 	    githubHelpers.battle(this.props.location.state.playersInfo).then(function (scores) {
 	      this.setState({
 	        scores: scores,
-	        isLoading: true
+	        isLoading: false
 	      });
 	    }.bind(this));
 	  },
